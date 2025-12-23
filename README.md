@@ -145,5 +145,10 @@ terraform destroy
 
 ## 👤 Author
 
-**Prashanth**  
+**Prashanth S**  
 Cloud | DevOps | IAM Automation
+
+## Connect with Me
+
+📌 GitHub: [Your Repository URL](https://github.com/prashanths125)
+📌 LinkedIn: [www.linkedin.com/in/sprashanthclouddevopsai](https://www.linkedin.com/in/sprashanthclouddevopsai/)
