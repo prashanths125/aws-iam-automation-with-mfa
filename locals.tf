@@ -10,9 +10,9 @@
 locals {
   users = [
     for user in csvdecode(file(var.users_csv_path)) : {
-      username   = lower(trim(user.username))
-      email      = lower(trim(user.email))
-      department = title(trim(user.department))
+      username   = lower(trim(user.username, " "))
+      email      = lower(trim(user.email, " "))
+      department = title(trim(user.department, " "))
     }
   ]
 
@@ -36,8 +36,13 @@ locals {
   # Prevents Terraform failures and enforces
   # controlled onboarding.
   # ------------------------------------------------
-  validated_users = [
+  validated_users_list = [
     for u in local.users : u
     if contains(local.allowed_departments, u.department)
   ]
+
+  # Convert list to map keyed by username
+  validated_users = {
+    for u in local.validated_users_list : u.username => u
+  }
 }

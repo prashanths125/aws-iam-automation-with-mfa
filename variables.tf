@@ -22,6 +22,19 @@ variable "users_csv_path" {
   default     = "users.csv"
 }
 
+# Department-specific policies (map of department => policy ARN)
+variable "department_policies" {
+  description = "Department policy mapping"
+  type        = map(string)
+
+  default = {
+    development = "arn:aws:iam::aws:policy/PowerUserAccess"
+    testing     = "arn:aws:iam::aws:policy/ReadOnlyAccess"
+    dba         = "arn:aws:iam::aws:policy/AmazonRDSFullAccess"
+    devops      = "arn:aws:iam::aws:policy/AdministratorAccess"
+  }
+}
+
 # --------------------------------------------------
 # Force Destroy IAM Users
 # --------------------------------------------------
