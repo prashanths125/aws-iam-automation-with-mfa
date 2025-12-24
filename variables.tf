@@ -16,7 +16,7 @@ variable "aws_region" {
 # Path to the CSV file that acts as the single
 # source of truth for IAM user onboarding.
 # --------------------------------------------------
-variable "users_csv_path" {
+variable "csv_file_path" {
   description = "Path to CSV file containing IAM users"
   type        = string
   default     = "users.csv"
@@ -24,7 +24,7 @@ variable "users_csv_path" {
 
 # Department-specific policies (map of department => policy ARN)
 variable "department_policies" {
-  description = "Department policy mapping"
+  description = "Department to IAM policy mapping"
   type        = map(string)
 
   default = {
@@ -33,17 +33,4 @@ variable "department_policies" {
     dba         = "arn:aws:iam::aws:policy/AmazonRDSFullAccess"
     devops      = "arn:aws:iam::aws:policy/AdministratorAccess"
   }
-}
-
-# --------------------------------------------------
-# Force Destroy IAM Users
-# --------------------------------------------------
-# Allows Terraform to delete IAM users even if
-# they still have credentials attached.
-# Useful for clean teardown in test environments.
-# --------------------------------------------------
-variable "force_destroy" {
-  description = "Force destroy IAM users on terraform destroy"
-  type        = bool
-  default     = true
 }
